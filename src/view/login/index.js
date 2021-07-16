@@ -9,7 +9,15 @@ function Login() {
     const [senha, setSenha] = useState("");
 
     function Logar() {
-        alert("lets log");
+        firebase
+            .auth()
+            .signInWithEmailAndPassword(email, senha)
+            .then((res) => {
+                alert("Usuario logado com sucesso!");
+            })
+            .catch((err) => {
+                alert(err);
+            });
     }
 
     return (
