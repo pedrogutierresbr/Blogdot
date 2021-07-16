@@ -7,16 +7,18 @@ import "firebase/auth";
 function Login() {
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
+    const [msgTipo, setMsgTipo] = useState("");
 
     function Logar() {
+        //autenticou com firebase e com a promise tratou as respostas
         firebase
             .auth()
             .signInWithEmailAndPassword(email, senha)
             .then((res) => {
-                alert("Usuario logado com sucesso!");
+                setMsgTipo("sucesso");
             })
             .catch((err) => {
-                alert(err);
+                setMsgTipo("erro");
             });
     }
 
@@ -60,12 +62,17 @@ function Login() {
                 </button>
 
                 <div className="msg-login text-white text-center my-5">
-                    <span>
-                        <strong>Wow!</strong> Você esta conectado! &#129304;
-                        <br />
-                        <strong>Ops!</strong> Verifique se senha ou usuário estão
-                        corretos! &#128078;
-                    </span>
+                    {msgTipo === "sucesso" && (
+                        <span>
+                            <strong>Wow!</strong> Você esta conectado! &#129304;
+                        </span>
+                    )}
+                    {msgTipo === "erro" && (
+                        <span>
+                            <strong>Ops!</strong> Verifique se senha ou usuário
+                            estãocorretos! &#128078;
+                        </span>
+                    )}
                 </div>
 
                 <div className="opcoes-login mt-5 d-flex justify-content-around">
