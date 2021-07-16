@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import "./login.css";
 
+import firebase from "../../config/firebase";
+import "firebase/auth";
+
 function Login() {
+    const [email, setEmail] = useState("");
+    const [senha, setSenha] = useState("");
+
+    function Logar() {
+        alert("lets log");
+    }
+
     return (
         <div className="login-content d-flex align-items-center">
             <form className="form-signin mx-auto">
@@ -19,20 +29,26 @@ function Login() {
                 </div>
 
                 <input
+                    onChange={(e) => setEmail(e.target.value)}
                     type="email"
                     id="inputEmail"
                     className="form-control my-2"
                     placeholder="Email"
                 />
                 <input
+                    onChange={(e) => setSenha(e.target.value)}
                     type="password"
                     id="inputPassword"
                     className="form-control my-2"
                     placeholder="Senha"
                 />
 
-                <button className="btn btn-lg btn-block btn-login" type="submit">
-                    Sign in
+                <button
+                    onClick={Logar}
+                    className="btn btn-lg btn-block btn-login"
+                    type="button"
+                >
+                    Logar
                 </button>
 
                 <div className="msg-login text-white text-center my-5">
