@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./login.css";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 import firebase from "../../config/firebase";
 import "firebase/auth";
@@ -28,10 +28,11 @@ function Login() {
             });
     }
 
-    alert(useSelector((state) => state.usuarioEmail));
-
     return (
         <div className="login-content d-flex align-items-center">
+            {/* condicional para redirecionar usuario para home caso logado, senao nao faz nada */}
+            {useSelector((state) => state.usuarioLogado) > 0 ? <Redirect to="/" /> : null}
+
             <form className="form-signin mx-auto">
                 <div className="text-center mb-4">
                     <h1 className="h3 mb-3 fw-normal font-weight-bold text-white">
