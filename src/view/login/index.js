@@ -5,10 +5,14 @@ import { Link } from "react-router-dom";
 import firebase from "../../config/firebase";
 import "firebase/auth";
 
+import { useSelector, useDispatch } from "react-redux";
+
 function Login() {
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
     const [msgTipo, setMsgTipo] = useState("");
+
+    const dispatch = useDispatch();
 
     function Logar() {
         //autenticou com firebase e com a promise tratou as respostas
@@ -17,11 +21,14 @@ function Login() {
             .signInWithEmailAndPassword(email, senha)
             .then((res) => {
                 setMsgTipo("sucesso");
+                dispatch({ type: "LOG_IN", usuarioEmail: email });
             })
             .catch((err) => {
                 setMsgTipo("erro");
             });
     }
+
+    alert(useSelector((state) => state.usuarioEmail));
 
     return (
         <div className="login-content d-flex align-items-center">
@@ -63,8 +70,8 @@ function Login() {
                     )}
                     {msgTipo === "erro" && (
                         <span>
-                            <strong>Ops!</strong> Verifique se senha ou usuário
-                            estãocorretos! &#128078;
+                            <strong>Ops!</strong> Verifique se senha ou usuário estão
+                            corretos! &#128078;
                         </span>
                     )}
                 </div>
@@ -74,7 +81,7 @@ function Login() {
                         Recuperar Senha
                     </a>
                     <span className=" text-white ">&#8900;</span>
-                    <Link to="novousuario" href="/" className="mx-2">
+                    <Link to="/novousuario" className="mx-2">
                         Cadastre-se
                     </Link>
                 </div>

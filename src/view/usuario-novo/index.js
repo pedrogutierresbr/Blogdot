@@ -20,6 +20,9 @@ function NovoUsuario() {
         if (!email || !senha) {
             setMsgTipo("erro");
             setMsg("Você precisa informar o email e senha para fazer o cadastro");
+            setTimeout(() => {
+                setCarregando(0);
+            }, 500);
             return;
         }
 
