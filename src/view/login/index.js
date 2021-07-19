@@ -32,7 +32,7 @@ function Login() {
 
     return (
         <div className="login-content d-flex align-items-center">
-            {/* condicional para redirecionar usuario para home caso logado, senao nao faz nada */}
+            {/* useSelector: vai la na store, pega o usuarioLogado de la e aplica redirecionamento se condicional for verdadeira */}
             {useSelector((state) => state.usuarioLogado) > 0 ? <Redirect to="/" /> : null}
 
             <form className="form-signin mx-auto">
