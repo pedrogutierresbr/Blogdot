@@ -21,7 +21,9 @@ function Login() {
             .signInWithEmailAndPassword(email, senha)
             .then((res) => {
                 setMsgTipo("sucesso");
-                dispatch({ type: "LOG_IN", usuarioEmail: email });
+                setTimeout(() => {
+                    dispatch({ type: "LOG_IN", usuarioEmail: email });
+                }, 1000);
             })
             .catch((err) => {
                 setMsgTipo("erro");
