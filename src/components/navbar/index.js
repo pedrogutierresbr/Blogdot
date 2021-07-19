@@ -8,8 +8,8 @@ function Navbar() {
     const dispatch = useDispatch();
 
     return (
-        <nav className="navbar navbar-expand-lg">
-            <span className="navbar-brand text-white font-weight-bold">Bolgdot</span>
+        <nav className="navbar navbar-expand-lg d-flex justify-content-between">
+            <i className="far fa-comment-dots  text-white fa-2x"></i>
             <button
                 className="navbar-toggler"
                 type="button"
@@ -23,7 +23,7 @@ function Navbar() {
             </button>
             <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav">
-                    <li className="nav-item active">
+                    <li className="nav-item active ml-2">
                         <Link to="/" className="nav-link">
                             Home
                         </Link>
