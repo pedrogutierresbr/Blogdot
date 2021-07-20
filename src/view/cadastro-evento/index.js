@@ -13,6 +13,49 @@ import Navbar from "../../components/navbar";
 
 function CadastroEvento() {
     const [msgTipo, setMsgTipo] = useState("sucesso");
+    const [titulo, setTitulo] = useState();
+    const [tipo, setTipo] = useState();
+    const [detalhes, setDetalhes] = useState();
+    const [data, setData] = useState();
+    const [hora, setHora] = useState();
+    const [foto, setFoto] = useState();
+    const [usuarioEmail, setUsuarioEmail] = useState();
+
+    const storage = firebase.storage();
+    const db = firebase.firestore();
+
+    //pega o usuario da store e salva no estado usuarioEmail
+    setUsuarioEmail(useSelector((state) => state.usuarioEmail));
+
+    function cadastrar() {
+        setMsgTipo(null);
+
+        storage
+            .ref(`imagens/${foto.name}`)
+            .put(foto)
+            .then(() => {
+                db.collection("eventos")
+                    .add({
+                        titulo: titulo,
+                        tipo: tipo,
+                        detalhes: detalhes,
+                        data: data,
+                        hora: hora,
+                        usuario: usuarioEmail,
+                        vizualizacoes: 0,
+                        foto: foto.name,
+                        publico: 1,
+                        criacao: new Date(),
+                    })
+                    .then(() => {
+                        setMsgTipo("sucesso");
+                    });
+            })
+            .catch((erro) => {
+                setMsgTipo("erro");
+            });
+    }
+
     return (
         <>
             <Navbar />
@@ -24,12 +67,16 @@ function CadastroEvento() {
                 <form>
                     <div className="form-group">
                         <label>Titulo:</label>
-                        <input type="text" className="form-control" />
+                        <input
+                            onChange={(e) => setTitulo(e.target.value)}
+                            type="text"
+                            className="form-control"
+                        />
                     </div>
 
                     <div className="form-group">
                         <label>Tipo do Evento:</label>
-                        <select className="form-control">
+                        <select onChange={(e) => setTipo(e.target.value)} className="form-control">
                             <option disabled selected value>
                                 -- Selecione um tipo --
                             </option>
@@ -42,26 +89,43 @@ function CadastroEvento() {
 
                     <div className="form-group">
                         <label>Descrição do evento:</label>
-                        <textarea className="form-control" rows="3" />
+                        <textarea
+                            onChange={(e) => setDetalhes(e.target.value)}
+                            className="form-control"
+                            rows="3"
+                        />
                     </div>
 
                     <div className="form-group row">
                         <div className="col-6">
                             <label>Data:</label>
-                            <input type="date" className="form-control" />
+                            <input
+                                onChange={(e) => setData(e.target.value)}
+                                type="date"
+                                className="form-control"
+                            />
                         </div>
                         <div className="col-6">
                             <label>Hora:</label>
-                            <input type="time" className="form-control" />
+                            <input
+                                onChange={(e) => setHora(e.target.value)}
+                                type="time"
+                                className="form-control"
+                            />
                         </div>
                     </div>
 
                     <div className="form-group">
                         <label>Upload da foto:</label>
-                        <input type="file" className="form-control" />
+                        <input
+                            onChange={(e) => setFoto(e.target.files[0])}
+                            type="file"
+                            className="form-control"
+                        />
                     </div>
 
                     <button
+                        onClick={cadastrar}
                         type="button"
                         className="btn btn-lg btn-block mt-3 mb-5 btn-cadastro"
                     >
@@ -77,8 +141,7 @@ function CadastroEvento() {
                     )}
                     {msgTipo === "erro" && (
                         <span>
-                            <strong>Ops!</strong> Não foi possível publicar o evento!
-                            &#128078;
+                            <strong>Ops!</strong> Não foi possível publicar o evento! &#128078;
                         </span>
                     )}
                 </div>
