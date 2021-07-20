@@ -34,13 +34,20 @@ function Home() {
     return (
         <>
             <Navbar />
-            <h1>{useSelector((state) => state.usuarioLogado)}</h1>
-            <h1>{useSelector((state) => state.usuarioEmail)}</h1>
 
-            <div className="row">
+            <div className="row p-5">
+                <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Pesquisar Evento pelo Título"
+                />
+            </div>
+
+            <div className="row p-4">
                 {eventos.map((item) => (
                     <EventoCard
                         key={item.id}
+                        id={item.id}
                         img={item.foto}
                         titulo={item.titulo}
                         detalhes={item.detalhes}

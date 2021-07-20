@@ -27,14 +27,16 @@ function EventoCard(props) {
 
                 <div className="row rodape-card d-flex align-items-center">
                     <div className="col-6">
-                        <Link to="/" className="btn btn-sm btn-detalhes">
+                        <Link
+                            to={"/eventodetalhes/" + props.id}
+                            className="btn btn-sm btn-detalhes"
+                        >
                             Mais detalhes
                         </Link>
                     </div>
 
                     <div className="col-6 text-right">
-                        <i class="fas fa-eye"></i>
-                        <span>{props.visualizacoes}</span>
+                        <i class="fas fa-eye"></i> <span>{props.visualizacoes}</span>
                     </div>
                 </div>
             </div>
