@@ -12,6 +12,7 @@ import EventoCard from "../../components/evento-card";
 
 function Home() {
     const [eventos, setEventos] = useState([]); //Eventos vindos do firebase
+    const [pesquisa, setPesquisa] = useState("");
     let listaEventos = [];
 
     useEffect(() => {
@@ -21,10 +22,12 @@ function Home() {
             .get()
             .then(async (resultado) => {
                 await resultado.docs.forEach((doc) => {
-                    listaEventos.push({
-                        id: doc.id,
-                        ...doc.data(),
-                    });
+                    if (doc.data().titulo.indexOf(pesquisa) >= 0) {
+                        listaEventos.push({
+                            id: doc.id,
+                            ...doc.data(),
+                        });
+                    }
                 });
 
                 setEventos(listaEventos);
@@ -37,13 +40,14 @@ function Home() {
 
             <div className="row p-5">
                 <input
+                    onChange={(e) => setPesquisa(e.target.value)}
                     type="text"
-                    className="form-control"
-                    placeholder="Pesquisar Evento pelo Título"
+                    className="form-control text-center "
+                    placeholder="Pesquisar Evento pelo Título ..."
                 />
             </div>
 
-            <div className="row p-4">
+            <div className="row p-4 mx-auto">
                 {eventos.map((item) => (
                     <EventoCard
                         key={item.id}

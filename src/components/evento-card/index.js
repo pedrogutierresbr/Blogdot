@@ -15,7 +15,7 @@ function EventoCard(props) {
             .ref(`imagens/${props.img}`)
             .getDownloadURL()
             .then((url) => setUrlImagem(url));
-    });
+    }, [props.img, urlImagem]);
 
     return (
         <div className="col-md-3 col-sm-12">
