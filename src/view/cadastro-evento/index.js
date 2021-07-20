@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { Spinner } from "react-bootstrap";
 
 import { Link } from "react-router-dom";
 import "./cadastro-evento.css";
@@ -19,15 +20,16 @@ function CadastroEvento() {
     const [data, setData] = useState();
     const [hora, setHora] = useState();
     const [foto, setFoto] = useState();
-    const [usuarioEmail, setUsuarioEmail] = useState();
+    const [carregando, setCarregando] = useState();
+
+    //pega o usuario da store e salva no estado usuarioEmail
+    const usuarioEmail = useSelector((state) => state.usuarioEmail);
 
     const storage = firebase.storage();
     const db = firebase.firestore();
 
-    //pega o usuario da store e salva no estado usuarioEmail
-    setUsuarioEmail(useSelector((state) => state.usuarioEmail));
-
     function cadastrar() {
+        setCarregando(1);
         setMsgTipo(null);
 
         storage
@@ -48,10 +50,12 @@ function CadastroEvento() {
                         criacao: new Date(),
                     })
                     .then(() => {
+                        setCarregando(0);
                         setMsgTipo("sucesso");
                     });
             })
             .catch((erro) => {
+                setCarregando(0);
                 setMsgTipo("erro");
             });
     }
@@ -124,13 +128,26 @@ function CadastroEvento() {
                         />
                     </div>
 
-                    <button
-                        onClick={cadastrar}
-                        type="button"
-                        className="btn btn-lg btn-block mt-3 mb-5 btn-cadastro"
-                    >
-                        Publicar evento
-                    </button>
+                    <div className="row">
+                        {carregando > 0 ? (
+                            <Spinner
+                                className="mx-auto"
+                                animation="border"
+                                variant="danger"
+                                role="status"
+                            >
+                                <span className="sr-only">Loading...</span>
+                            </Spinner>
+                        ) : (
+                            <button
+                                onClick={cadastrar}
+                                type="button"
+                                className="btn btn-lg btn-block mt-3 mb-5 btn-cadastro"
+                            >
+                                Publicar evento
+                            </button>
+                        )}
+                    </div>
                 </form>
 
                 <div className="msg-login text-center mt-2">
