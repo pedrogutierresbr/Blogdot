@@ -19,6 +19,7 @@
 }
 
 .img-cartao {
-    height: 200px; /*Colocar para max-height antes de publicar proj*/
+    max-height: 200px;
+    min-height: 100px;
     min-width: 100%;
 }

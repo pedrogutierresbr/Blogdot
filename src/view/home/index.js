@@ -10,35 +10,60 @@ import "./home.css";
 import Navbar from "../../components/navbar";
 import EventoCard from "../../components/evento-card";
 
-function Home() {
+function Home({ match }) {
     const [eventos, setEventos] = useState([]); //Eventos vindos do firebase
     const [pesquisa, setPesquisa] = useState("");
     let listaEventos = [];
 
-    useEffect(() => {
-        firebase
-            .firestore()
-            .collection("eventos")
-            .get()
-            .then(async (resultado) => {
-                await resultado.docs.forEach((doc) => {
-                    if (doc.data().titulo.indexOf(pesquisa) >= 0) {
-                        listaEventos.push({
-                            id: doc.id,
-                            ...doc.data(),
-                        });
-                    }
-                });
+    const usuarioEmail = useSelector((state) => state.usuarioEmail); //via redux me informa qual usuario esta logado
 
-                setEventos(listaEventos);
-            });
+    useEffect(() => {
+        //if: condicao que mostra eventos do user logado 'match'
+        if (match.params.parametro) {
+            firebase
+                .firestore()
+                .collection("eventos")
+                .where("usuario", "==", usuarioEmail)
+                .get()
+                .then(async (resultado) => {
+                    await resultado.docs.forEach((doc) => {
+                        if (doc.data().titulo.indexOf(pesquisa) >= 0) {
+                            listaEventos.push({
+                                id: doc.id,
+                                ...doc.data(),
+                            });
+                        }
+                    });
+
+                    setEventos(listaEventos);
+                });
+        } else {
+            //else: condicao que mostra todos os eventos da plataforma
+            firebase
+                .firestore()
+                .collection("eventos")
+                .get()
+                .then(async (resultado) => {
+                    await resultado.docs.forEach((doc) => {
+                        if (doc.data().titulo.indexOf(pesquisa) >= 0) {
+                            listaEventos.push({
+                                id: doc.id,
+                                ...doc.data(),
+                            });
+                        }
+                    });
+
+                    setEventos(listaEventos);
+                });
+        }
     });
 
     return (
         <>
             <Navbar />
 
-            <div className="row p-5">
+            <div className="row">
+                <h2 className="mx-auto p-5">Eventos Publicados</h2>
                 <input
                     onChange={(e) => setPesquisa(e.target.value)}
                     type="text"

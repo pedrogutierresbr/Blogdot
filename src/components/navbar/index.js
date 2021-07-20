@@ -38,7 +38,7 @@ function Navbar() {
                                 </Link>
                             </li>
                             <li className="nav-item active">
-                                <Link to="" className="nav-link">
+                                <Link to="eventos/meuseventos" className="nav-link">
                                     Meus Eventos
                                 </Link>
                             </li>
