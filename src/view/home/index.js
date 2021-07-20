@@ -1,15 +1,36 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
-import "./home.css";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import firebase from "../../config/firebase";
+
+import "./home.css";
 
 //Components
 import Navbar from "../../components/navbar";
 import EventoCard from "../../components/evento-card";
 
-import { useSelector } from "react-redux";
-
 function Home() {
+    const [eventos, setEventos] = useState([]); //Eventos vindos do firebase
+    let listaEventos = [];
+
+    useEffect(() => {
+        firebase
+            .firestore()
+            .collection("eventos")
+            .get()
+            .then(async (resultado) => {
+                await resultado.docs.forEach((doc) => {
+                    listaEventos.push({
+                        id: doc.id,
+                        ...doc.data(),
+                    });
+                });
+
+                setEventos(listaEventos);
+            });
+    });
+
     return (
         <>
             <Navbar />
@@ -17,7 +38,9 @@ function Home() {
             <h1>{useSelector((state) => state.usuarioEmail)}</h1>
 
             <div className="row">
-                <EventoCard />
+                {eventos.map((item) => (
+                    <EventoCard />
+                ))}
             </div>
         </>
     );
