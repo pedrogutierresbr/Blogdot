@@ -44,7 +44,7 @@ function CadastroEvento() {
                         data: data,
                         hora: hora,
                         usuario: usuarioEmail,
-                        vizualizacoes: 0,
+                        visualizacoes: 0,
                         foto: foto.name,
                         publico: 1,
                         criacao: new Date(),

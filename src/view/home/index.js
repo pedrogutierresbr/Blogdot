@@ -39,7 +39,13 @@ function Home() {
 
             <div className="row">
                 {eventos.map((item) => (
-                    <EventoCard />
+                    <EventoCard
+                        key={item.id}
+                        img={item.foto}
+                        titulo={item.titulo}
+                        detalhes={item.detalhes}
+                        visualizacoes={item.visualizacoes}
+                    />
                 ))}
             </div>
         </>
