@@ -1,7 +1,6 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+// eslint-disable-next-line no-unused-vars
 import { Link } from "react-router-dom";
 import firebase from "../../config/firebase";
 
@@ -37,7 +36,7 @@ function Home({ match }) {
                     });
 
                     setEventos(listaEventos);
-                }, []);
+                });
         } else {
             //else: condicao que mostra todos os eventos da plataforma
             firebase
@@ -55,9 +54,10 @@ function Home({ match }) {
                     });
 
                     setEventos(listaEventos);
-                }, []);
+                });
         }
-    });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <>

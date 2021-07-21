@@ -13,14 +13,14 @@ import "firebase/auth";
 import Navbar from "../../components/navbar";
 
 function CadastroEvento() {
-    const [msgTipo, setMsgTipo] = useState("sucesso");
+    const [carregando, setCarregando] = useState();
+    const [msgTipo, setMsgTipo] = useState();
     const [titulo, setTitulo] = useState();
     const [tipo, setTipo] = useState();
     const [detalhes, setDetalhes] = useState();
     const [data, setData] = useState();
     const [hora, setHora] = useState();
     const [foto, setFoto] = useState();
-    const [carregando, setCarregando] = useState();
 
     //pega o usuario da store e salva no estado usuarioEmail
     const usuarioEmail = useSelector((state) => state.usuarioEmail);
@@ -71,11 +71,7 @@ function CadastroEvento() {
                 <form>
                     <div className="form-group">
                         <label>Titulo:</label>
-                        <input
-                            onChange={(e) => setTitulo(e.target.value)}
-                            type="text"
-                            className="form-control"
-                        />
+                        <input onChange={(e) => setTitulo(e.target.value)} type="text" className="form-control" />
                     </div>
 
                     <div className="form-group">
@@ -93,49 +89,28 @@ function CadastroEvento() {
 
                     <div className="form-group">
                         <label>Descrição do evento:</label>
-                        <textarea
-                            onChange={(e) => setDetalhes(e.target.value)}
-                            className="form-control"
-                            rows="3"
-                        />
+                        <textarea onChange={(e) => setDetalhes(e.target.value)} className="form-control" rows="3" />
                     </div>
 
                     <div className="form-group row">
                         <div className="col-6">
                             <label>Data:</label>
-                            <input
-                                onChange={(e) => setData(e.target.value)}
-                                type="date"
-                                className="form-control"
-                            />
+                            <input onChange={(e) => setData(e.target.value)} type="date" className="form-control" />
                         </div>
                         <div className="col-6">
                             <label>Hora:</label>
-                            <input
-                                onChange={(e) => setHora(e.target.value)}
-                                type="time"
-                                className="form-control"
-                            />
+                            <input onChange={(e) => setHora(e.target.value)} type="time" className="form-control" />
                         </div>
                     </div>
 
                     <div className="form-group">
                         <label>Upload da foto:</label>
-                        <input
-                            onChange={(e) => setFoto(e.target.files[0])}
-                            type="file"
-                            className="form-control"
-                        />
+                        <input onChange={(e) => setFoto(e.target.files[0])} type="file" className="form-control" />
                     </div>
 
                     <div className="row">
                         {carregando > 0 ? (
-                            <Spinner
-                                className="mx-auto"
-                                animation="border"
-                                variant="danger"
-                                role="status"
-                            >
+                            <Spinner className="mx-auto" animation="border" variant="danger" role="status">
                                 <span className="sr-only">Loading...</span>
                             </Spinner>
                         ) : (

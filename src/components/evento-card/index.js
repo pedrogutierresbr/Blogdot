@@ -15,7 +15,8 @@ function EventoCard(props) {
             .ref(`imagens/${props.img}`)
             .getDownloadURL()
             .then((url) => setUrlImagem(url));
-    }, [props.img, urlImagem]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <div className="col-md-3 col-sm-12">
@@ -27,10 +28,7 @@ function EventoCard(props) {
 
                 <div className="row rodape-card d-flex align-items-center">
                     <div className="col-6">
-                        <Link
-                            to={"/detalhesevento/" + props.id}
-                            className="btn btn-sm btn-detalhes"
-                        >
+                        <Link to={"/detalhesevento/" + props.id} className="btn btn-sm btn-detalhes">
                             Mais detalhes
                         </Link>
                     </div>

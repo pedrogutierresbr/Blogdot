@@ -20,25 +20,44 @@ function DetalhesEvento(props) {
 
     //Pra toda hora que carregar a tela ele ir la no firebase e carregar as infos em tela
     useEffect(() => {
-        firebase
-            .firestore()
-            .collection("eventos")
-            .doc(props.match.params.id)
-            .get()
-            .then((resultado) => {
-                //salva os dados do evento no estado Evento
-                setEvento(resultado.data());
-                //salva a url da imagem no estado UrlImg
-                firebase
-                    .storage()
-                    .ref(`imagens/${evento.foto}`)
-                    .getDownloadURL()
-                    .then((url) => {
-                        setUrlImg(url);
-                        setCarregando(0);
-                    });
-            });
-    }, [evento.foto, props.match.params.id]);
+        if (carregando) {
+            //se carregando estiver ativo ele faz toda a busca la no banco
+            firebase
+                .firestore()
+                .collection("eventos")
+                .doc(props.match.params.id)
+                .get()
+                .then((resultado) => {
+                    //salva os dados do evento no estado Evento
+                    setEvento(resultado.data());
+                    //incrementa numero de visualizacoes no firebase, consequentemente na tela
+                    firebase
+                        .firestore()
+                        .collection("eventos")
+                        .doc(props.match.params.id)
+                        .update("visualizacoes", resultado.data().visualizacoes + 1);
+                    //salva a url da imagem no estado UrlImg
+                    firebase
+                        .storage()
+                        .ref(`imagens/${resultado.data().foto}`)
+                        .getDownloadURL()
+                        .then((url) => {
+                            setUrlImg(url);
+                            setCarregando(0);
+                        });
+                });
+        } else {
+            //se der errado e voltar no useEffect, resguardo pedindo para carregar apenas a imagem
+            firebase
+                .storage()
+                .ref(`imagens/${evento.foto}`)
+                .getDownloadURL()
+                .then((url) => {
+                    setUrlImg(url);
+                });
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <>
@@ -56,7 +75,7 @@ function DetalhesEvento(props) {
                             <img src={urlImg} className="img-banner" alt="Banner" />
 
                             <div className="col-12 text-right mt-2 visualizacoes">
-                                <i class="fas fa-eye"></i> <span>{evento.visualizacoes}</span>
+                                <i class="fas fa-eye"></i> <span>{evento.visualizacoes + 1}</span>
                             </div>
 
                             <h2 className="mx-auto mt-4 titulo">
