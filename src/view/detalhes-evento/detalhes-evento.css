@@ -23,3 +23,7 @@
 .btn-editar i:hover {
     color: #614ea6;
 }
+
+.titulo {
+    color: #614ea6 !important;
+}

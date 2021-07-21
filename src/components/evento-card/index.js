@@ -28,7 +28,7 @@ function EventoCard(props) {
                 <div className="row rodape-card d-flex align-items-center">
                     <div className="col-6">
                         <Link
-                            to={"/eventodetalhes/" + props.id}
+                            to={"/detalhesevento/" + props.id}
                             className="btn btn-sm btn-detalhes"
                         >
                             Mais detalhes

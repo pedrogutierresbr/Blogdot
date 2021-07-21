@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -10,17 +10,39 @@ import firebase from "../../config/firebase";
 //Components
 import Navbar from "../../components/navbar";
 
-function DetalhesEvento() {
+function DetalhesEvento(props) {
+    const [evento, setEvento] = useState({}); //tem que ter o {} porque o firebase devolve uma estrutura JSON
+    const [urlImg, setUrlImg] = useState({}); //para guardar a url da imagem que esta no firestore
+    const usuarioLogado = useSelector((state) => state.usuarioEmail);
+
+    //Pra toda hora que carregar a tela ele ir la no firebase e carregar as infos em tela
+    useEffect(() => {
+        firebase
+            .firestore()
+            .collection("eventos")
+            .doc(props.match.params.id)
+            .get()
+            .then((resultado) => {
+                //salva os dados do evento no estado Evento
+                setEvento(resultado.data());
+                //salva a url da imagem no estado UrlImg
+                firebase
+                    .storage()
+                    .ref(`imagens/${evento.foto}`)
+                    .getDownloadURL()
+                    .then((url) => setUrlImg(url));
+            });
+    }, [evento.foto, props.match.params.id]);
+
     return (
         <>
             <Navbar />
             <div className="container-fluid ">
                 <div className="row">
-                    <img
-                        src="https://via.placeholder.com/150x100"
-                        className="img-banner"
-                        alt="Banner"
-                    />
+                    <img src={urlImg} className="img-banner" alt="Banner" />
+                    <h2 className="mx-auto mt-5 titulo">
+                        <strong>{evento.titulo}</strong>
+                    </h2>
                 </div>
 
                 <div className="row mt-5 d-flex justify-content-around">
@@ -29,7 +51,7 @@ function DetalhesEvento() {
                         <h5>
                             <strong>Tipo</strong>
                         </h5>
-                        <span className="mt-3">Festa</span>
+                        <span className="mt-3">{evento.tipo}</span>
                     </div>
 
                     <div className="col-md-3 col-sm-12 box-info p-3 my-2">
@@ -37,7 +59,7 @@ function DetalhesEvento() {
                         <h5>
                             <strong>Data</strong>
                         </h5>
-                        <span className="mt-3">10/10/2021</span>
+                        <span className="mt-3">{evento.data}</span>
                     </div>
 
                     <div className="col-md-3 col-sm-12 box-info p-3 my-2">
@@ -45,29 +67,29 @@ function DetalhesEvento() {
                         <h5>
                             <strong>Hora</strong>
                         </h5>
-                        <span className="mt-3">19:00</span>
+                        <span className="mt-3">{evento.hora}</span>
                     </div>
                 </div>
 
                 <div className="row box-detalhes mt-5">
-                    <h5 className="mx-auto">
-                        <strong>Detalhes do Evento</strong>
-                    </h5>
-                    <p className="text-justify py-3 px-5">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum has been the industry's standard dummy text ever since the
-                        1500s, when an unknown printer took a galley of type and scrambled it to
-                        make a type specimen book. It has survived not only five centuries, but also
-                        the leap into electronic typesetting, remaining essentially unchanged. It
-                        was popularised in the 1960s with the release of Letraset sheets containing
-                        Lorem Ipsum passages, and more recently with desktop publishing software
-                        like Aldus PageMaker including versions of Lorem Ipsum.
-                    </p>
+                    <div className="col-12 text-center">
+                        <h5>
+                            <strong>Detalhes do Evento</strong>
+                        </h5>
+                    </div>
+
+                    <div className="col-12 text-center">
+                        <p className="text-justify py-3 px-5">{evento.detalhes}</p>
+                    </div>
                 </div>
 
-                <Link to="/" className="btn-editar">
-                    <i className="fas fa-pen-square fa-3x"></i>
-                </Link>
+                {usuarioLogado === evento.usuario ? (
+                    <Link to="/" className="btn-editar">
+                        <i className="fas fa-pen-square fa-3x"></i>
+                    </Link>
+                ) : (
+                    ""
+                )}
             </div>
         </>
     );
