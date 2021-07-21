@@ -40,7 +40,12 @@ function DetalhesEvento(props) {
             <div className="container-fluid ">
                 <div className="row">
                     <img src={urlImg} className="img-banner" alt="Banner" />
-                    <h2 className="mx-auto mt-5 titulo">
+
+                    <div className="col-12 text-right mt-2 visualizacoes">
+                        <i class="fas fa-eye"></i> <span>{evento.visualizacoes}</span>
+                    </div>
+
+                    <h2 className="mx-auto mt-4 titulo">
                         <strong>{evento.titulo}</strong>
                     </h2>
                 </div>
