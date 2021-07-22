@@ -36,7 +36,7 @@ function Home({ match }) {
                     });
 
                     setEventos(listaEventos);
-                });
+                }, []);
         } else {
             //else: condicao que mostra todos os eventos da plataforma
             firebase
@@ -54,10 +54,9 @@ function Home({ match }) {
                     });
 
                     setEventos(listaEventos);
-                });
+                }, []);
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    });
 
     return (
         <>
