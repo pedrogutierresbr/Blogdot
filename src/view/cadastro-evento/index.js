@@ -30,20 +30,22 @@ function CadastroEvento(props) {
     const db = firebase.firestore();
 
     useEffect(() => {
-        //resgata o evento de acordo com o id e guarda no resultado
-        firebase
-            .firestore()
-            .collection("eventos")
-            .doc(props.match.params.id)
-            .get()
-            .then((resultado) => {
-                setTitulo(resultado.data()?.titulo);
-                setTipo(resultado.data()?.tipo);
-                setDetalhes(resultado.data()?.detalhes);
-                setData(resultado.data()?.data);
-                setHora(resultado.data()?.hora);
-                setFotoAtual(resultado.data()?.foto);
-            });
+        if (props.match.params.id) {
+            //resgata o evento de acordo com o id e guarda no resultado
+            firebase
+                .firestore()
+                .collection("eventos")
+                .doc(props.match.params.id)
+                .get()
+                .then((resultado) => {
+                    setTitulo(resultado.data().titulo);
+                    setTipo(resultado.data().tipo);
+                    setDetalhes(resultado.data().detalhes);
+                    setData(resultado.data().data);
+                    setHora(resultado.data().hora);
+                    setFotoAtual(resultado.data().foto);
+                });
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [carregando]);
 
