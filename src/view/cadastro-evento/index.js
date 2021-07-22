@@ -12,7 +12,7 @@ import "firebase/auth";
 //Components
 import Navbar from "../../components/navbar";
 
-function CadastroEvento() {
+function CadastroEvento(props) {
     const [carregando, setCarregando] = useState();
     const [msgTipo, setMsgTipo] = useState();
     const [titulo, setTitulo] = useState();
@@ -65,7 +65,9 @@ function CadastroEvento() {
             <Navbar />
             <div className="col-12 mt-5">
                 <div className="row">
-                    <h3 className="mx-auto font-weight-bold ">Novo Evento</h3>
+                    <h3 className="mx-auto font-weight-bold ">
+                        {props.match.params.id ? "Atualizar evento" : "Novo evento"}
+                    </h3>
                 </div>
 
                 <form>
@@ -119,7 +121,7 @@ function CadastroEvento() {
                                 type="button"
                                 className="btn btn-lg btn-block mt-3 mb-5 btn-cadastro"
                             >
-                                Publicar evento
+                                {props.match.params.id ? "Atualizar evento" : "Publicar evento"}
                             </button>
                         )}
                     </div>
