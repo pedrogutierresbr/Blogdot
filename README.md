@@ -1,72 +1,76 @@
-# In progress
+# Blogdot
 
-<!-- # Getting Started with Create React App
+## Sobre o projeto
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este é um sistema de publicação de eventos, que permite ao usuario da plataforma gerenciar seus eventos e aos visitantes a consulta de cada evento. Foi Desenvolvido utilizando as tecnologias React JS, Bootstrap e Firebase.
 
-## Available Scripts
+## O que você pode fazer?
 
-In the project directory, you can run:
+-   [👥] Cadastro de Usuários
 
-### `yarn start`
+-   [🔒] Autenticação de Usuários
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+-   [📧] Recuperação de senha com envio de e-mail automático
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+-   [📋] Publicar, editar, remover e pesquisar eventos para usuários logados no sistema
 
-### `yarn test`
+-   [🔎] Pesquisa de eventos para usuários visitantes
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+-   [👀] Quantidade de Visualizações em cada evento
 
-### `yarn build`
+-   [📷] Upload de imagem para cada evento
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+-   [📲] Layout responsivo
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Demonstração
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![]()
 
-### `yarn eject`
+## Tecnologias usadas
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+As seguintes ferramentas foram usadas na construção do projeto:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+-   HTML
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+-   CSS
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+-   JavaScript
 
-## Learn More
+-   ReactJS
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+-   React Redux
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+-   React Router
 
-### Code Splitting
+-   Bootstrap
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+-   Firebase
 
-### Analyzing the Bundle Size
+-   Redux
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+-   Redux Persist
 
-### Making a Progressive Web App
+-   NodeJs
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Pré-requisitos
 
-### Advanced Configuration
+Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas: [Git](https://git-scm.com/) e [Node.js](https://nodejs.org/en/).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Além disto, é bom ter um editor para trabalhar com o código,exemplo: [VSCode](https://code.visualstudio.com/)
 
-### Deployment
+## Como usar
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```
+# No terminal
 
-### `yarn build` fails to minify
+1° git clone https://github.com/pedrogutierresbr/Blogdot.git
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify) -->
+2° npm install -> Para instalar as dependencias necessarias para o projeto
+
+3° npm start -> Para iniciar o projeto (Para acessar via browser, digite no navegador: localhost:3000)
+```
+
+# Autor
+
+Pedro Gabriel Gutierres de Faria
+See my [LinkedIn](https://www.linkedin.com/in/pedro-gutierres/)
