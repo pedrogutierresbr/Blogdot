@@ -20,7 +20,8 @@ function CadastroEvento(props) {
     const [detalhes, setDetalhes] = useState();
     const [data, setData] = useState();
     const [hora, setHora] = useState();
-    const [foto, setFoto] = useState();
+    const [fotoAtual, setFotoAtual] = useState();
+    const [fotoNova, setFotoNova] = useState();
 
     //pega o usuario da store e salva no estado usuarioEmail
     const usuarioEmail = useSelector((state) => state.usuarioEmail);
@@ -36,11 +37,12 @@ function CadastroEvento(props) {
             .doc(props.match.params.id)
             .get()
             .then((resultado) => {
-                setTitulo(resultado.data().titulo);
-                setTipo(resultado.data().tipo);
-                setDetalhes(resultado.data().detalhes);
-                setData(resultado.data().data);
-                setHora(resultado.data().hora);
+                setTitulo(resultado.data()?.titulo);
+                setTipo(resultado.data()?.tipo);
+                setDetalhes(resultado.data()?.detalhes);
+                setData(resultado.data()?.data);
+                setHora(resultado.data()?.hora);
+                setFotoAtual(resultado.data()?.foto);
             });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [carregando]);
@@ -48,6 +50,10 @@ function CadastroEvento(props) {
     function atualizar() {
         setMsgTipo(null);
         setCarregando(1);
+
+        if (fotoNova) {
+            storage.ref(`imagens/${fotoNova.name}`).put(fotoNova);
+        }
 
         db.collection("eventos")
             .doc(props.match.params.id)
@@ -57,6 +63,7 @@ function CadastroEvento(props) {
                 detalhes: detalhes,
                 data: data,
                 hora: hora,
+                foto: fotoNova ? fotoNova.name : fotoAtual,
             })
             .then(() => {
                 setMsgTipo("sucesso");
@@ -73,8 +80,8 @@ function CadastroEvento(props) {
         setCarregando(1);
 
         storage
-            .ref(`imagens/${foto.name}`)
-            .put(foto)
+            .ref(`imagens/${fotoNova.name}`)
+            .put(fotoNova)
             .then(() => {
                 db.collection("eventos")
                     .add({
@@ -85,7 +92,7 @@ function CadastroEvento(props) {
                         hora: hora,
                         usuario: usuarioEmail,
                         visualizacoes: 0,
-                        foto: foto.name,
+                        foto: fotoNova.name,
                         publico: 1,
                         criacao: new Date(),
                     })
@@ -166,8 +173,14 @@ function CadastroEvento(props) {
                     </div>
 
                     <div className="form-group">
-                        <label>Upload da foto:</label>
-                        <input onChange={(e) => setFoto(e.target.files[0])} type="file" className="form-control" />
+                        <label>
+                            Upload da foto{" "}
+                            {props.match.params.id
+                                ? "(caso queira manter a foto atual, não precisa anexar uma nova imagem)"
+                                : null}
+                            :
+                        </label>
+                        <input onChange={(e) => setFotoNova(e.target.files[0])} type="file" className="form-control" />
                     </div>
 
                     <div className="row">
