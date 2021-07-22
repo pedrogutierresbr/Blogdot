@@ -63,11 +63,13 @@ Além disto, é bom ter um editor para trabalhar com o código,exemplo: [VSCode]
 ```
 # No terminal
 
-1° git clone https://github.com/pedrogutierresbr/Blogdot.git
+1° - git clone https://github.com/pedrogutierresbr/Blogdot.git -> Para clonar o repositório
 
-2° npm install -> Para instalar as dependencias necessarias para o projeto
+2° - cd Blodot -> para acessar a pasta do projeto no terminal/cmd
 
-3° npm start -> Para iniciar o projeto (Para acessar via browser, digite no navegador: localhost:3000)
+3° - npm install -> Para instalar as dependencias necessarias para o projeto
+
+4° - npm start -> Para iniciar o projeto (Para acessar via browser, digite no navegador: localhost:3000)
 ```
 
 # Autor

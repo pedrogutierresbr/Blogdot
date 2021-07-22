@@ -5,7 +5,7 @@
 }
 
 .box-info {
-    background-color: #614ea6;
+    background-color: #4d7ea8 !important;
     color: #fff;
     display: flex;
     flex-direction: column;
@@ -16,15 +16,15 @@
     position: fixed;
     bottom: 10px;
     right: 10px;
-    color: #f21667;
+    color: #4d7ea8 !important;
     transition: 0.3s ease-in;
 }
 
 .btn-editar i:hover {
-    color: #614ea6;
+    color: #da2c38 !important;
 }
 
 .titulo,
 .visualizacoes {
-    color: #614ea6 !important;
+    color: #4d7ea8 !important;
 }

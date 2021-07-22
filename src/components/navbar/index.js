@@ -1,8 +1,8 @@
 import React from "react";
-import "./navbar.css";
 import { Link } from "react-router-dom";
-
 import { useSelector, useDispatch } from "react-redux";
+
+import "./navbar.css";
 
 function Navbar() {
     const dispatch = useDispatch();
@@ -43,10 +43,7 @@ function Navbar() {
                                 </Link>
                             </li>
                             <li className="nav-item active">
-                                <Link
-                                    onClick={() => dispatch({ type: "LOG_OUT" })}
-                                    className="nav-link"
-                                >
+                                <Link onClick={() => dispatch({ type: "LOG_OUT" })} className="nav-link">
                                     Sair
                                 </Link>
                             </li>

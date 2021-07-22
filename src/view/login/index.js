@@ -35,7 +35,7 @@ function Login() {
             {/* useSelector: vai la na store, pega o usuarioLogado de la e aplica redirecionamento se condicional for verdadeira */}
             {useSelector((state) => state.usuarioLogado) > 0 ? <Redirect to="/" /> : null}
 
-            <form className="text-center form-signin mx-auto">
+            <form className="text-center form-width form-signin mx-auto">
                 <i className="far fa-comment-dots  text-white fa-5x"></i>
                 <div className="text-center mt-2 mb-4">
                     <h1 className="h3 mb-3 fw-normal font-weight-bold text-white">Login</h1>

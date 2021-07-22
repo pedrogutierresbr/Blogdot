@@ -50,9 +50,7 @@ function NovoUsuario() {
                         break;
 
                     default:
-                        setMsg(
-                            "Não foi possível realizar o cadastro. Tente novamente mais tarde!"
-                        );
+                        setMsg("Não foi possível realizar o cadastro. Tente novamente mais tarde!");
                         break;
                 }
             });
@@ -95,8 +93,7 @@ function NovoUsuario() {
                     <div className="msg-login text-black text-center my-5">
                         {msgTipo === "sucesso" && (
                             <span>
-                                <strong>Wow!</strong> Usuário cadastrado com sucesso!
-                                &#129304;
+                                <strong>Wow!</strong> Usuário cadastrado com sucesso! &#129304;
                             </span>
                         )}
                         {msgTipo === "erro" && (

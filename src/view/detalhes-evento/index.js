@@ -3,10 +3,9 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Spinner } from "react-bootstrap";
 import { Link, Redirect } from "react-router-dom";
+import firebase from "../../config/firebase";
 
 import "./detalhes-evento.css";
-
-import firebase from "../../config/firebase";
 
 //Components
 import Navbar from "../../components/navbar";
@@ -77,7 +76,7 @@ function DetalhesEvento(props) {
             {/* condicional para redirecionar para a pagina home caso evento tenha sido excluido */}
             {excluido > 0 ? <Redirect to="/" /> : null}
 
-            <div className="container-fluid">
+            <div className="container">
                 {carregando ? (
                     <div className="row  mt-5">
                         <Spinner animation="border" variant="danger" role="status" className="mx-auto">
@@ -125,7 +124,7 @@ function DetalhesEvento(props) {
                         </div>
 
                         <div className="row box-detalhes mt-5">
-                            <div className="col-12 text-center">
+                            <div className="col-12 text-center titulo">
                                 <h5>
                                     <strong>Detalhes do Evento</strong>
                                 </h5>

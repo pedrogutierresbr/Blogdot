@@ -2,12 +2,11 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Spinner } from "react-bootstrap";
-
 import { Link } from "react-router-dom";
-import "./cadastro-evento.css";
-
 import firebase from "../../config/firebase";
 import "firebase/auth";
+
+import "./cadastro-evento.css";
 
 //Components
 import Navbar from "../../components/navbar";
@@ -112,9 +111,9 @@ function CadastroEvento(props) {
     return (
         <>
             <Navbar />
-            <div className="col-12 mt-5">
+            <div className="container mt-5">
                 <div className="row">
-                    <h3 className="mx-auto font-weight-bold ">
+                    <h3 className="mx-auto font-weight-bold">
                         {props.match.params.id ? "Atualizar evento" : "Novo evento"}
                     </h3>
                 </div>
@@ -185,7 +184,7 @@ function CadastroEvento(props) {
                         <input onChange={(e) => setFotoNova(e.target.files[0])} type="file" className="form-control" />
                     </div>
 
-                    <div className="row">
+                    <div className="row d-flex justify-content-center">
                         {carregando > 0 ? (
                             <Spinner className="mx-auto" animation="border" variant="danger" role="status">
                                 <span className="sr-only">Loading...</span>
@@ -194,7 +193,7 @@ function CadastroEvento(props) {
                             <button
                                 onClick={props.match.params.id ? atualizar : cadastrar}
                                 type="button"
-                                className="btn btn-lg btn-block mt-3 mb-5 btn-cadastro"
+                                className="btn btn-lg mt-3 mb-5 btn-cadastro"
                             >
                                 {props.match.params.id ? "Atualizar evento" : "Publicar evento"}
                             </button>

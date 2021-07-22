@@ -3,16 +3,20 @@
     height: 100vh;
     padding: 15%;
     margin: auto;
-    background-color: #614ea6;
+    background-color: #4d7ea8;
+}
+
+.form-width {
+    width: 25vw;
 }
 
 .btn-login {
     background-color: #fff !important;
-    color: #614ea6 !important;
+    color: #4d7ea8 !important;
 }
 
 .btn-login:hover {
-    background-color: #f21667 !important;
+    background-color: #abc3d8 !important;
     color: #fff !important;
 }
 
@@ -24,5 +28,21 @@
 
 .opcoes-login a:hover {
     text-decoration: none;
-    color: #f21667;
+    color: #abc3d8;
+}
+
+@media (max-width: 768px) {
+    .form-width {
+        width: 35vw;
+    }
+}
+
+@media (max-width: 576px) {
+    .form-width {
+        width: 50vw;
+    }
+
+    .opcoes-login {
+        flex-direction: column;
+    }
 }

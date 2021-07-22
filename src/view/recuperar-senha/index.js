@@ -26,28 +26,25 @@ function RecuperarSenha() {
     return (
         <>
             <Navbar />
+            <div className="contaienr">
+                <form className="text-center form-login mx-auto mt-5">
+                    <h3 className="mb-3 font-weight-bold">Recuperar Senha</h3>
+                    <input
+                        type="email"
+                        onChange={(e) => setEmail(e.target.value)}
+                        className="form-control my-2"
+                        placeholder="email"
+                    />
 
-            <form className="text-center form-login mx-auto mt-5">
-                <h3 className="mb-3 font-weight-bold">Recuperar Senha</h3>
-                <input
-                    type="email"
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="form-control my-2"
-                    placeholder="email"
-                />
+                    <div className="msg my-4 text-center">
+                        <span>{msg}</span>
+                    </div>
 
-                <div className="msg my-4 text-center">
-                    <span>{msg}</span>
-                </div>
-
-                <button
-                    type="button"
-                    onClick={recuperarSenha}
-                    className="btn btn-lg btn-block btn-enviar"
-                >
-                    Recuperar Senha
-                </button>
-            </form>
+                    <button type="button" onClick={recuperarSenha} className="btn btn-lg btn-block btn-enviar">
+                        Recuperar Senha
+                    </button>
+                </form>
+            </div>
         </>
     );
 }
