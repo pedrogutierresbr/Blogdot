@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Spinner } from "react-bootstrap";
 
@@ -28,9 +28,49 @@ function CadastroEvento(props) {
     const storage = firebase.storage();
     const db = firebase.firestore();
 
-    function cadastrar() {
-        setCarregando(1);
+    useEffect(() => {
+        //resgata o evento de acordo com o id e guarda no resultado
+        firebase
+            .firestore()
+            .collection("eventos")
+            .doc(props.match.params.id)
+            .get()
+            .then((resultado) => {
+                setTitulo(resultado.data().titulo);
+                setTipo(resultado.data().tipo);
+                setDetalhes(resultado.data().detalhes);
+                setData(resultado.data().data);
+                setHora(resultado.data().hora);
+            });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [carregando]);
+
+    function atualizar() {
         setMsgTipo(null);
+        setCarregando(1);
+
+        db.collection("eventos")
+            .doc(props.match.params.id)
+            .update({
+                titulo: titulo,
+                tipo: tipo,
+                detalhes: detalhes,
+                data: data,
+                hora: hora,
+            })
+            .then(() => {
+                setMsgTipo("sucesso");
+                setCarregando(0);
+            })
+            .catch((erro) => {
+                setMsgTipo("erro");
+                setCarregando(0);
+            });
+    }
+
+    function cadastrar() {
+        setMsgTipo(null);
+        setCarregando(1);
 
         storage
             .ref(`imagens/${foto.name}`)
@@ -50,13 +90,13 @@ function CadastroEvento(props) {
                         criacao: new Date(),
                     })
                     .then(() => {
-                        setCarregando(0);
                         setMsgTipo("sucesso");
+                        setCarregando(0);
+                    })
+                    .catch((erro) => {
+                        setMsgTipo("erro");
+                        setCarregando(0);
                     });
-            })
-            .catch((erro) => {
-                setCarregando(0);
-                setMsgTipo("erro");
             });
     }
 
@@ -73,12 +113,17 @@ function CadastroEvento(props) {
                 <form>
                     <div className="form-group">
                         <label>Titulo:</label>
-                        <input onChange={(e) => setTitulo(e.target.value)} type="text" className="form-control" />
+                        <input
+                            onChange={(e) => setTitulo(e.target.value)}
+                            type="text"
+                            className="form-control"
+                            value={titulo && titulo}
+                        />
                     </div>
 
                     <div className="form-group">
                         <label>Tipo do Evento:</label>
-                        <select onChange={(e) => setTipo(e.target.value)} className="form-control">
+                        <select onChange={(e) => setTipo(e.target.value)} className="form-control" value={tipo && tipo}>
                             <option disabled selected value>
                                 -- Selecione um tipo --
                             </option>
@@ -91,17 +136,32 @@ function CadastroEvento(props) {
 
                     <div className="form-group">
                         <label>Descrição do evento:</label>
-                        <textarea onChange={(e) => setDetalhes(e.target.value)} className="form-control" rows="3" />
+                        <textarea
+                            onChange={(e) => setDetalhes(e.target.value)}
+                            className="form-control"
+                            rows="3"
+                            value={detalhes && detalhes}
+                        />
                     </div>
 
                     <div className="form-group row">
                         <div className="col-6">
                             <label>Data:</label>
-                            <input onChange={(e) => setData(e.target.value)} type="date" className="form-control" />
+                            <input
+                                onChange={(e) => setData(e.target.value)}
+                                type="date"
+                                className="form-control"
+                                value={data && data}
+                            />
                         </div>
                         <div className="col-6">
                             <label>Hora:</label>
-                            <input onChange={(e) => setHora(e.target.value)} type="time" className="form-control" />
+                            <input
+                                onChange={(e) => setHora(e.target.value)}
+                                type="time"
+                                className="form-control"
+                                value={hora && hora}
+                            />
                         </div>
                     </div>
 
@@ -117,7 +177,7 @@ function CadastroEvento(props) {
                             </Spinner>
                         ) : (
                             <button
-                                onClick={cadastrar}
+                                onClick={props.match.params.id ? atualizar : cadastrar}
                                 type="button"
                                 className="btn btn-lg btn-block mt-3 mb-5 btn-cadastro"
                             >
