@@ -38,9 +38,7 @@ function Login() {
             <form className="text-center form-signin mx-auto">
                 <i className="far fa-comment-dots  text-white fa-5x"></i>
                 <div className="text-center mt-2 mb-4">
-                    <h1 className="h3 mb-3 fw-normal font-weight-bold text-white">
-                        Login
-                    </h1>
+                    <h1 className="h3 mb-3 fw-normal font-weight-bold text-white">Login</h1>
                 </div>
 
                 <input
@@ -58,11 +56,7 @@ function Login() {
                     placeholder="Senha"
                 />
 
-                <button
-                    onClick={Logar}
-                    className="btn btn-lg btn-block btn-login"
-                    type="button"
-                >
+                <button onClick={Logar} className="btn btn-lg btn-block btn-login" type="button">
                     Logar
                 </button>
 
@@ -74,8 +68,7 @@ function Login() {
                     )}
                     {msgTipo === "erro" && (
                         <span>
-                            <strong>Ops!</strong> Verifique se senha ou usuário estão
-                            corretos! &#128078;
+                            <strong>Ops!</strong> Verifique se senha ou usuário estão corretos! &#128078;
                         </span>
                     )}
                 </div>

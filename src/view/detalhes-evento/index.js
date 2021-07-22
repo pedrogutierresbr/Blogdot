@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Spinner } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 import "./detalhes-evento.css";
 
@@ -15,8 +15,20 @@ function DetalhesEvento(props) {
     const [evento, setEvento] = useState({}); //tem que ter o {} porque o firebase devolve uma estrutura JSON
     const [urlImg, setUrlImg] = useState({}); //para guardar a url da imagem que esta no firestore
     const [carregando, setCarregando] = useState(1);
+    const [excluido, setExcluido] = useState(0); // variavel de estado para saber se foi excluido evento ou nao
 
     const usuarioLogado = useSelector((state) => state.usuarioEmail);
+
+    function remover() {
+        firebase
+            .firestore()
+            .collection("eventos")
+            .doc(props.match.params.id)
+            .delete()
+            .then(() => {
+                setExcluido(1);
+            });
+    }
 
     //Pra toda hora que carregar a tela ele ir la no firebase e carregar as infos em tela
     useEffect(() => {
@@ -62,6 +74,9 @@ function DetalhesEvento(props) {
     return (
         <>
             <Navbar />
+            {/* condicional para redirecionar para a pagina home caso evento tenha sido excluido */}
+            {excluido > 0 ? <Redirect to="/" /> : null}
+
             <div className="container-fluid">
                 {carregando ? (
                     <div className="row  mt-5">
@@ -128,6 +143,16 @@ function DetalhesEvento(props) {
                         ) : (
                             ""
                         )}
+
+                        {usuarioLogado === evento.usuario ? (
+                            <button
+                                onClick={remover}
+                                type="button"
+                                className="btn btn-lg btn-block mt-3 mb-5 btn-cadastro"
+                            >
+                                Remover Evento
+                            </button>
+                        ) : null}
                     </div>
                 )}
             </div>
