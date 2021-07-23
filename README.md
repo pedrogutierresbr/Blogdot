@@ -2,7 +2,7 @@
 
 ## Sobre o projeto
 
-Este é um sistema de publicação de eventos, que permite ao usuario da plataforma gerenciar seus eventos e aos visitantes a consulta de cada evento. Foi Desenvolvido utilizando as tecnologias React JS, Bootstrap e Firebase.
+Este é um sistema de publicação de eventos, que permite ao usuário cadastrado da plataforma gerenciar seus eventos e aos visitantes a consulta de cada evento. Foi Desenvolvido utilizando as tecnologias React JS, Bootstrap e Firebase.
 
 ## O que você pode fazer?
 
