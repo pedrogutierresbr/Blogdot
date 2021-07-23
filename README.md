@@ -24,7 +24,7 @@ Este é um sistema de publicação de eventos, que permite ao usuario da platafo
 
 ## Demonstração
 
-![]()
+![Demonstração](https://github.com/pedrogutierresbr/Blogdot/blob/main/public/assets/gif-desktop.gif?raw=true)
 
 ## Tecnologias usadas
 
