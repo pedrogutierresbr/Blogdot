@@ -50,7 +50,6 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 -   Redux Persist
 
--   NodeJs
 
 ## Pré-requisitos
 
