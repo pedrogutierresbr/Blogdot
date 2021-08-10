@@ -66,9 +66,9 @@ Além disto, é bom ter um editor para trabalhar com o código,exemplo: [VSCode]
 
 2° - cd Blodot -> para acessar a pasta do projeto no terminal/cmd
 
-3° - npm install -> Para instalar as dependencias necessarias para o projeto
+3° - npm install -> Para instalar as dependências necessárias para o projeto
 
-4° - npm start -> Para iniciar o projeto (Para acessar via browser, digite no navegador: localhost:3000)
+4° - npm start -> Para iniciar o projeto (Acesso via browser, digite no navegador: localhost:3000)
 ```
 
 # Autor
